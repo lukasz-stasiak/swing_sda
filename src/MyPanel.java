@@ -17,10 +17,11 @@ class MyPanel extends JPanel implements ActionListener {
 
     String zalog;
 
-  /*  Random r = new Random();
-    int x = r.nextInt(201);*/
+    Random r = new Random();
+    int x = r.nextInt(201);
 
-    int x = 2;
+    //for tests:
+   // int x = 2;
 
 
     public MyPanel() {
