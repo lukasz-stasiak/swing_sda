@@ -6,7 +6,7 @@ import java.util.Random;
 
 
 class MyPanel extends JPanel implements ActionListener {
-    JButton button, buttonScore;
+    JButton button, buttonScore, restart;
     JTextField textField, textField2, textValid;
     JLabel label, label2, label3, label4, zalogowano;
     JTextArea textArea;
@@ -83,12 +83,67 @@ class MyPanel extends JPanel implements ActionListener {
         button = new JButton("Sprawdź!");
         button.setBounds(60, 110, 150, 30);
         add(button);
-        button.addActionListener(this);
+        button.addActionListener(e -> {
+            try {
+//zamiana na int i przekazywanie liczby z pola do metody
+                int liczba = Integer.parseInt(textField.getText());
+                setBackground(Color.CYAN);
+                if (liczba == x) {
+                    textArea.setText("BRAWO!! Trafiłeś po: " + iloscTrafien + " strzałach");
+                    setBackground(Color.YELLOW);
+
+                    textField.setText("");
+
+                    //MESSAGE BOX
+                    int response = JOptionPane.showConfirmDialog(null,
+                            "Zapisać wynik?", "Wybierz opcje...", JOptionPane.YES_NO_OPTION);
+                    if (response == JOptionPane.YES_NO_OPTION) {
+                        System.out.println("Zapisano wynik");
+                        DBScores dbScores = new DBScores();
+                        dbScores.updateScore(zalog, iloscTrafien); // UDATE SCORE
+                        setBackground(Color.CYAN);
+                    } else if (response == JOptionPane.NO_OPTION) {
+                        System.out.println("Nie zapisano wyniku");
+                        setBackground(Color.CYAN);
+                    } else if (response == JOptionPane.CLOSED_OPTION) {
+                        System.out.println("Nie zapisano wyniku. CANCEL");
+                        setBackground(Color.CYAN);
+                    }
+                    iloscTrafien = 1;
+
+
+                } else if (liczba > x) {
+                    textArea.setText("Niestety strzał chybiony, poszukiwana liczba jest MNIEJSZA od " + liczba + ".\n Podaj kolejny strzał");
+
+                    iloscTrafien++;
+                } else {
+
+                    textArea.setText("Niestety strzał chybiony, poszukiwana liczba jest WIĘKSZA od " + liczba + ".\n Podaj kolejny strzał");
+                    iloscTrafien++;
+                }
+            } catch (NumberFormatException ime) {
+                textArea.setText("Nie podałeś prawidłowej liczby, spróbuj ponownie.");
+                setBackground(Color.RED);
+            }
+
+
+        });
 
         buttonScore = new JButton("Pokaż tabelę wyników");
         buttonScore.setBounds(10, 220, 200, 30);
         add(buttonScore);
-        buttonScore.addActionListener(this);
+        buttonScore.addActionListener(e -> {
+            new TableScore();
+        });
+
+        restart = new JButton("Restart programu. Ponowne logowanie");
+        restart.setBounds(100, 300, 230, 30);
+        add(restart);
+        restart.addActionListener(e -> {
+            GamePanel.getInstance().setVisible(false);
+            LogonPanel.getInstance().setVisible(true);
+
+        });
 
     }
 
@@ -96,46 +151,6 @@ class MyPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // JOptionPane.showMessageDialog(null, "Hello");
 
-        try {
-//zamiana na int i przekazywanie liczby z pola do metody
-            int liczba = Integer.parseInt(textField.getText());
-            setBackground(Color.CYAN);
-            if (liczba == x) {
-                textArea.setText("BRAWO!! Trafiłeś po: " + iloscTrafien + " strzałach");
-                setBackground(Color.YELLOW);
-                iloscTrafien = 1;
-                textField.setText("");
-
-                //MESSAGE BOX
-                int response = JOptionPane.showConfirmDialog(null,
-                        "Zapisać wynik?", "Wybierz opcje...", JOptionPane.YES_NO_OPTION);
-                if (response == JOptionPane.YES_NO_OPTION) {
-                    System.out.println("Zapisano wynik");
-                    setBackground(Color.CYAN);
-                } else if (response == JOptionPane.NO_OPTION) {
-                    System.out.println("Nie zapisano wyniku");
-                    setBackground(Color.CYAN);
-                } else if (response == JOptionPane.CLOSED_OPTION) {
-                    System.out.println("Nie zapisano wyniku. CANCEL");
-                    setBackground(Color.CYAN);
-                }
-       /*     // 0=yes, 1=no, 2=cancel
-            System.out.println(response);*/
-
-
-            } else if (liczba > x) {
-                textArea.setText("Niestety strzał chybiony, poszukiwana liczba jest MNIEJSZA od " + liczba + ".\n Podaj kolejny strzał");
-
-                iloscTrafien++;
-            } else {
-
-                textArea.setText("Niestety strzał chybiony, poszukiwana liczba jest WIĘKSZA od " + liczba + ".\n Podaj kolejny strzał");
-                iloscTrafien++;
-            }
-        } catch (NumberFormatException ime) {
-            textArea.setText("Nie podałeś prawidłowej liczby, spróbuj ponownie.");
-            setBackground(Color.RED);
-        }
 /*DBScores takeScores = new DBScores();
 takeScores.showUser("Jan");*/
     }

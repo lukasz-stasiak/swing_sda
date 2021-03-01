@@ -4,17 +4,15 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DBScores extends DBConnection{
-
-
+public class DBScores extends DBConnection {
 
 
     public ResultSet takeScore() {
 
         try {
-            System.out.println("hello");
+            /*System.out.println("hello");*/
             connectDb();
-            String sql = "SELECT * from Users";
+            String sql = "SELECT name as User, score as Score from Users ORDER BY score ASC";
             ResultSet rs = stmt.executeQuery(sql);
             disconnectDB();
             return rs;
@@ -68,4 +66,23 @@ public class DBScores extends DBConnection{
             System.err.println("SQL error " + e.getMessage());
         }
     }
+
+    public void updateScore(String user, int score) {
+        try {
+            connectDb();
+
+            prepStmt = conn.prepareStatement("UPDATE Users SET score = ? where name= ?");
+
+            prepStmt.setInt(1, score);
+            prepStmt.setString(2, user);
+
+            prepStmt.executeUpdate();
+            disconnectDB();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        new DBScores().wyswietl();
+    }
+
 }

@@ -32,7 +32,8 @@ class MyPanel_Logon extends JPanel  {
             if (validate.checkUsers(textLogin.getText(),textPass.getText())) {
                 StoreLogin.getInstance().setLogin(textLogin.getText());
                 GamePanel.getInstance();
-                LogonPanel.getInstance().dispose();
+                LogonPanel.getInstance().setVisible(false);
+                GamePanel.getInstance().setVisible(true);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Użytkownik nie istnieję. Spróbuj się zarejestrować");
