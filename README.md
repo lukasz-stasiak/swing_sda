@@ -37,6 +37,10 @@ b.	W pole tekstowe wpisujemy liczbę z zakresu od 1 do 200
 
 ![04_gra](https://user-images.githubusercontent.com/68491092/109713448-836f6980-7ba1-11eb-878b-ad6a8bad2a0a.PNG)
 
+Gdy zostanie wpisana inna wartość niż liczbowa:
+
+![044_error](https://user-images.githubusercontent.com/68491092/109720633-a2bec480-7baa-11eb-8450-e4316f8e8975.PNG)
+
 4.	Gdy zgadniesz liczbę:
 
 a.	tło zmienia się na kolor zielony
