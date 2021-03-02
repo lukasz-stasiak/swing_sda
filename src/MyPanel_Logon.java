@@ -9,11 +9,22 @@ class MyPanel_Logon extends JPanel  {
     JTextField textLogin;
     JPasswordField textPass;
     DBValidateLogon validate;
+    JLabel lblLogin, lblPass;
 
     public MyPanel_Logon() {
         setLayout(null);
         setBackground(Color.CYAN);
         validate = new DBValidateLogon();
+
+        lblLogin = new JLabel("Login");
+        lblLogin.setBounds(100, 20, 100, 30);
+        lblLogin.setFont(new Font("Arial", Font.BOLD, 15));
+        add(lblLogin);
+
+        lblPass = new JLabel("Hasło");
+        lblPass.setBounds(100, 70, 100, 30);
+        lblPass.setFont(new Font("Arial", Font.BOLD, 15));
+        add(lblPass);
 
         textLogin = new JTextField();
         textLogin.setBounds(150, 20, 200, 30);
@@ -83,7 +94,7 @@ class MyPanel_Logon extends JPanel  {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(500, 300);
+        return new Dimension(500, 200);
     }
 
 

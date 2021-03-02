@@ -31,32 +31,34 @@ class MyPanel extends JPanel implements ActionListener {
         setLayout(null);
         setBackground(Color.CYAN);
 
-        zalogowano = new JLabel("Zalogowany jako " + zalog);
-        zalogowano.setBounds(530, 2, 120, 30);
+        zalogowano = new JLabel("Zalogowany jako: " + zalog);
+        zalogowano.setBounds(20, 5, 200, 30);
+        zalogowano.setForeground(Color.red);
+        zalogowano.setFont((new Font("Arial", Font.BOLD, 12)));
         add(zalogowano);
 
         label2 = new JLabel("Jest to gra do zgadywania liczb. Będziemy losować liczbę od 1 do 200.");
-        label2.setBounds(10, 5, 600, 30);
+        label2.setBounds(10, 25, 600, 30);
         label2.setFont(new Font("Arial", Font.BOLD, 15));
         add(label2);
 
         label3 = new JLabel("Spróbuj odgadnąć w najmniejszej liczbię kroków co to za liczba");
-        label3.setBounds(10, 24, 600, 30);
+        label3.setBounds(10, 54, 600, 30);
         label3.setFont(new Font("Arial", Font.BOLD, 15));
         add(label3);
 
 
         label4 = new JLabel("Podaj liczbę od 1 do 200:");
-        label4.setBounds(10, 70, 600, 30);
+        label4.setBounds(10, 95, 600, 30);
         label4.setFont(new Font("Arial", Font.BOLD, 14));
         add(label4);
 
         label = new JLabel();
-        label.setBounds(250, 90, 200, 30);
+        label.setBounds(250, 95, 200, 30);
         add(label);
 
         textField = new JTextField();
-        textField.setBounds(190, 70, 200, 30);
+        textField.setBounds(190, 95, 200, 30);
         textField.setFont(new Font("Arial", Font.BOLD, 15));
         add(textField);
 
@@ -74,15 +76,15 @@ class MyPanel extends JPanel implements ActionListener {
         });*/
 
 
-        textArea = new JTextArea("Tutaj pokaże się wynik");
-        textArea.setBounds(10, 150, 600, 50);
+        textArea = new JTextArea(""); // Wyświetla wynik
+        textArea.setBounds(10, 180, 600, 50);
         textArea.setFont(new Font("Arial", Font.BOLD, 15));
         textArea.setLineWrap(true);
         textArea.setBackground(null);
         add(textArea);
 
         button = new JButton("Sprawdź!");
-        button.setBounds(60, 110, 150, 30);
+        button.setBounds(60, 140, 150, 30);
         add(button);
         button.addActionListener(e -> {
             try {
@@ -131,20 +133,19 @@ class MyPanel extends JPanel implements ActionListener {
         });
 
         buttonScore = new JButton("Pokaż tabelę wyników");
-        buttonScore.setBounds(10, 220, 200, 30);
+        buttonScore.setBounds(230, 140, 200, 30);
         add(buttonScore);
         buttonScore.addActionListener(e -> {
             new TableScore();
         });
 
-        restart = new JButton("Restart programu. Ponowne logowanie");
+     /*   restart = new JButton("Restart programu. Ponowne logowanie");
         restart.setBounds(100, 300, 230, 30);
         add(restart);
         restart.addActionListener(e -> {
             GamePanel.getInstance().setVisible(false);
             LogonPanel.getInstance().setVisible(true);
-
-        });
+        });*/
 
     }
 
@@ -158,7 +159,7 @@ takeScores.showUser("Jan");*/
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(700, 400);
+        return new Dimension(550, 250);
     }
 
 
