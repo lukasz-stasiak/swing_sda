@@ -95,13 +95,14 @@ class MyPanel extends JPanel implements ActionListener {
                     textArea.setText("BRAWO!! Trafiłeś po: " + iloscTrafien + " strzałach");
                     setBackground(Color.YELLOW);
 
-                    textField.setText("");
+
 
                     //MESSAGE BOX
                     int response = JOptionPane.showConfirmDialog(null,
                             "Zapisać wynik?", "Wybierz opcje...", JOptionPane.YES_NO_OPTION);
                     if (response == JOptionPane.YES_NO_OPTION) {
                         System.out.println("Zapisano wynik");
+                        textField.setText("");
                         DBScores dbScores = new DBScores();
                         dbScores.updateScore(zalog, iloscTrafien); // UDATE SCORE
                         setBackground(Color.CYAN);
