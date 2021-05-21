@@ -1,4 +1,4 @@
-# swing_sda
+# swing_project
 Training Swing project for SDA 
 
 Gra polega na odgadnięciu w najmniejszej liczbie kroków wylosowanej liczby od 1 do 200.
